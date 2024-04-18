@@ -1,6 +1,7 @@
 package model
 
 type TranslateReview struct {
+	ID                 int64    `json:"id,omitempty" bson:"id"`
 	OriginalReview     string   `json:"original_review"`
 	TranslatedReview   string   `json:"translated_review"`
 	OriginalLanguage   Language `json:"original_language"`

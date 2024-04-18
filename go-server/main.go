@@ -7,7 +7,8 @@ import (
 
 	"review-transformer/internal/app"
 	"review-transformer/internal/db"
-	"review-transformer/internal/kafka"
+	"review-transformer/internal/kafkaclient"
+	"review-transformer/internal/migration"
 
 	"github.com/joho/godotenv"
 )
@@ -29,16 +30,20 @@ func corsMiddleware(next http.Handler) http.Handler {
 }
 
 func main() {
-	err := godotenv.Load("../../.env")
+	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
 
 	db.InitMongoDB(os.Getenv("MONGO_URI"))
+	migration.Migrate()
+	kafkaclient.InitProducer()
+	defer kafkaclient.Producer.Close()
+	kafkaclient.InitConsumer()
 	router := app.NewRouter()
 	wrappedRouter := corsMiddleware(router)
 
-	go kafka.ConsumeReviews()
+	go kafkaclient.ReviewConsumer()
 
 	log.Println("Starting server on port 8080...")
 	http.ListenAndServe(":8080", wrappedRouter)

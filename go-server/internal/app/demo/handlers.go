@@ -1,4 +1,4 @@
-package app
+package demo
 
 import (
 	"encoding/json"
@@ -7,14 +7,7 @@ import (
 	"review-transformer/internal/service"
 )
 
-func NewRouter() *http.ServeMux {
-	router := http.NewServeMux()
-
-	router.HandleFunc("/demo", demoHandler)
-	return router
-}
-
-func demoHandler(w http.ResponseWriter, r *http.Request) {
+func DemoHandler(w http.ResponseWriter, r *http.Request) {
 	reviewDemo := model.ReviewDemo{}
 	err := json.NewDecoder(r.Body).Decode(&reviewDemo)
 	if err != nil {

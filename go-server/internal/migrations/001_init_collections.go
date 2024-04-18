@@ -5,6 +5,9 @@ import (
 	"log"
 	"os"
 	"review-transformer/internal/db"
+
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 // Language represents the structure for our languages
@@ -14,7 +17,6 @@ type Language struct {
 }
 
 func InsertSupportLanguages() error {
-	log.Println("Inserting Supported Languages...")
 	collection := db.MongoClient.Database(os.Getenv("MONGO_DATABASE")).Collection("supportedLanguages")
 
 	languages := []interface{}{
@@ -36,10 +38,21 @@ func InsertSupportLanguages() error {
 		Language{Code: "vi", Name: "Vietnamese"},
 	}
 
-	_, insertErr := collection.InsertMany(context.TODO(), languages)
-	if insertErr != nil {
-		log.Fatal(insertErr)
-		return insertErr
+	for _, language := range languages {
+		filter := bson.D{
+			{Key: "language_code", Value: language.(Language).Code},
+			{Key: "language_name", Value: language.(Language).Name},
+		}
+		update := bson.D{{Key: "$set", Value: bson.D{
+			{Key: "language_code", Value: language.(Language).Code},
+			{Key: "language_name", Value: language.(Language).Name},
+		}}}
+
+		opts := options.Update().SetUpsert(true)
+		_, err := collection.UpdateOne(context.TODO(), filter, update, opts)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	log.Println("Inserted Supperted Language documents")
@@ -47,7 +60,6 @@ func InsertSupportLanguages() error {
 }
 
 func InsertLanguageCodes() error {
-	log.Println("Inserting Language Codes...")
 	collection := db.MongoClient.Database(os.Getenv("MONGO_DATABASE")).Collection("languages")
 
 	languages := []interface{}{
@@ -238,10 +250,21 @@ func InsertLanguageCodes() error {
 		Language{"zu", "Zulu"},
 	}
 
-	_, insertErr := collection.InsertMany(context.TODO(), languages)
-	if insertErr != nil {
-		log.Fatal(insertErr)
-		return insertErr
+	for _, language := range languages {
+		filter := bson.D{
+			{Key: "language_code", Value: language.(Language).Code},
+			{Key: "language_name", Value: language.(Language).Name},
+		}
+		update := bson.D{{Key: "$set", Value: bson.D{
+			{Key: "language_code", Value: language.(Language).Code},
+			{Key: "language_name", Value: language.(Language).Name},
+		}}}
+
+		opts := options.Update().SetUpsert(true)
+		_, err := collection.UpdateOne(context.TODO(), filter, update, opts)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	log.Println("Inserted Language Codes documents")

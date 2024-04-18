@@ -1,0 +1,17 @@
+# Ignore local .env files
+.env
+
+# Ignore Git and version control
+.git
+.gitignore
+
+# Ignore temporary/build files
+tmp/
+*.tmp
+*.swp
+
+# Ignore the Dockerfile (if desired)
+Dockerfile
+
+# Ignore README files
+README.md

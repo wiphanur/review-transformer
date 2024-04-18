@@ -16,6 +16,7 @@ var (
 // InitMongoDB initializes the MongoDB client.
 func InitMongoDB(connectionString string) {
 	var err error
+
 	clientOptions := options.Client().ApplyURI(connectionString)
 	MongoClient, err = mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {

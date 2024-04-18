@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"log"
 	"review-transformer/internal/db"
 	"review-transformer/internal/googleapi"
 	"review-transformer/internal/model"
@@ -15,18 +16,27 @@ func DemoService(review string) (model.TranslateReview, model.Sentiment, error) 
 	translatedReview.OriginalReview = review
 	translatedReview.TranslatedLanguage = model.Language{Code: "en", Name: "English"}
 
-	translatedText, originalLanguage, err := googleapi.TranslateText("en", review)
+	translatedText, originalLanguageCode, err := googleapi.TranslateText("en", review)
 	if err != nil {
 		return model.TranslateReview{}, model.Sentiment{}, err
 	}
 
 	translatedReview.TranslatedReview = translatedText
-	translatedReview.OriginalLanguage = model.Language{Code: originalLanguage, Name: ""}
+	translatedReview.OriginalLanguage = model.Language{Code: originalLanguageCode, Name: ""}
 
-	collection := db.MongoClient.Database("airbnb").Collection("supportedLanguages")
-	filter := bson.D{{Key: "language_code", Value: originalLanguage}}
+	collection := db.MongoClient.Database("airbnb").Collection("languages")
+	filter := bson.D{{Key: "language_code", Value: originalLanguageCode}}
 	err = collection.FindOne(context.Background(), filter).Decode(&translatedReview.OriginalLanguage)
 	if err != nil {
+		log.Printf("Could not find language with code %v: %v", originalLanguageCode, err)
+		return translatedReview, model.Sentiment{}, err
+	}
+
+	collection = db.MongoClient.Database("airbnb").Collection("supportedLanguages")
+	filter = bson.D{{Key: "language_code", Value: originalLanguageCode}}
+	err = collection.FindOne(context.Background(), filter).Decode(&translatedReview.OriginalLanguage)
+	if err != nil {
+		log.Printf("This language with code %v is not supported: %v", originalLanguageCode, err)
 		return translatedReview, model.Sentiment{}, err
 	}
 
