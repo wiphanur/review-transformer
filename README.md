@@ -31,7 +31,7 @@ The "Review Transformer" leverages a modern tech stack that optimally supports b
 ### Machine Learning Service
 
 **Python**
-- **ML Service**: The core of our sentiment analysis and data processing is written in Python, utilizing libraries such as Pandas for data manipulation, Scikit-Learn for machine learning algorithms, and NLTK for natural language processing. Python’s extensive library ecosystem and ease of integration make it ideal for our ML-centric tasks.
+- **ML Service**: The core of our sentiment analysis and data processing is written in Python. Initially, this service leverages Google Translate to convert non-English reviews into English, ensuring uniformity in data processing and enabling more accurate sentiment analysis across the diverse languages present in the dataset. After translation, sentiment analysis is currently performed using Google's Natural Language Processing (NLP) API, which supports both English and French. This API is adept at understanding the subtleties of language and identifying the sentiment expressed in the text effectively. In the future, I plan to develop and integrate my own machine learning model.
 
 ### Database
 
