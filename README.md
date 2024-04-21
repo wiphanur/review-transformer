@@ -52,7 +52,7 @@ The "Review Transformer" leverages a modern tech stack that optimally supports b
 - The application components are containerized using Docker, which are then managed and deployed using Kubernetes to handle orchestration efficiently. This setup provides resilience, scalability, and a high availability system that is crucial for handling our dataset's scale.
 
 # Data Set
-The dataset originates from the reputable source https://insideairbnb.com, featuring information specific to Paris, Île-de-France, France, within the Detailed Review Data subset. Comprising 1,721,452 rows and 6 columns, the dataset includes the following fields:
+The dataset originates from the reputable source https://insideairbnb.com, featuring information specific to Paris, Île-de-France, France, within the Detailed Review Data subset, with a cut-off date of December 23, 2023. Comprising 1,721,452 rows and 6 columns, the dataset includes the following fields:
 
 - "listing_id" (integer)
 - "id" (integer)
@@ -61,7 +61,7 @@ The dataset originates from the reputable source https://insideairbnb.com, featu
 - "reviewer_name" (string)
 - "comments" (string)
 
-[click here to download](https://github.com/Schecher1/Minecraft-Server-Creator/blob/master/README.md)
+[click here to download](https://drive.google.com/file/d/1OxUAJLst3Np9J3q7xpBVkU2Z4zxfiLfJ/view?usp=share_link)
 
 Why the Airbnb Dataset? --> Relevance and Richness of Data
 The Airbnb dataset, specifically the Detailed Review Data from Paris, provides a comprehensive view of customer opinions and experiences. Paris, being a major tourism hub, has a vast amount of data on guest interactions and satisfaction. This dataset includes over 1.7 million rows of feedback, which makes it incredibly valuable for extracting consumer insights due to its volume and diversity.
