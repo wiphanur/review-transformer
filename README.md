@@ -67,5 +67,5 @@ Why the Airbnb Dataset? --> Relevance and Richness of Data
 The Airbnb dataset, specifically the Detailed Review Data from Paris, provides a comprehensive view of customer opinions and experiences. Paris, being a major tourism hub, has a vast amount of data on guest interactions and satisfaction. This dataset includes over 1.7 million rows of feedback, which makes it incredibly valuable for extracting consumer insights due to its volume and diversity.
 
 # Demo
-[![Watch the video](./public/Thumbnail.png)](https://youtu.be/7CqVFBYPufA)
+[![Watch the video](./nextjs-server/public/Thumbnail.png)](https://youtu.be/7CqVFBYPufA)
 
