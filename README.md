@@ -46,11 +46,6 @@ The "Review Transformer" leverages a modern tech stack that optimally supports b
 **Docker**
 - **Containerization**: Docker containers encapsulate our application, making it easy to deploy and scale across any environment. Docker simplifies our CI/CD pipeline, ensuring that our application is portable and consistent across all development and production setups.
 
-### Deployment
-
-**Deployment & Integration**
-- The application components are containerized using Docker, which are then managed and deployed using Kubernetes to handle orchestration efficiently. This setup provides resilience, scalability, and a high availability system that is crucial for handling our dataset's scale.
-
 # Data Set
 The dataset originates from the reputable source https://insideairbnb.com, featuring information specific to Paris, Île-de-France, France, within the Detailed Review Data subset, with a cut-off date of December 23, 2023. Comprising 1,721,452 rows and 6 columns, the dataset includes the following fields:
 
